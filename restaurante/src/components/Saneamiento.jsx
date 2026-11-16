@@ -160,14 +160,16 @@ function Saneamiento({ onSanFirmado }) {
         if (!alimento) continue;
         const temperatura = getMateriaField(dia, "temperatura");
         const cantidad = getMateriaField(dia, "cantidad");
-        registros.push({ fecha: fechaMes(mesMateria, dia), alimento,
+        registros.push({
+          fecha: fechaMes(mesMateria, dia), alimento,
           temperatura: temperatura === "" ? null : Number(temperatura),
           proveedor: getMateriaField(dia, "proveedor") || null,
           cantidad: cantidad === "" ? null : Number(cantidad),
           textura: getMateriaField(dia, "textura") || null,
           olor: getMateriaField(dia, "olor") || null,
           sabor: getMateriaField(dia, "sabor") || null,
-          observaciones: getMateriaField(dia, "observaciones") || null });
+          observaciones: getMateriaField(dia, "observaciones") || null
+        });
       }
       await guardarLote("control_materia_prima", registros, "fecha,alimento");
       setGuardadoMateria(true); setTimeout(() => setGuardadoMateria(false), 3000);
@@ -267,30 +269,30 @@ function Saneamiento({ onSanFirmado }) {
     textAlign: "left",
   };
 
-const inputTabla = (valor, onChange, tipo = "text", extra = {}) => {
-  const Comp = tipo === "number" ? NumInput : "input";
-  const numProps =
-    tipo === "number" ? { allowDecimal: true, allowNegative: true } : {};
-  return (
-    <Comp
-      type={tipo}
-      {...numProps}
-      value={valor}
-      onChange={(e) => onChange(e.target.value)}
-      style={{
-        width: "100%",
-        padding: "3px 5px",
-        border: "none",
-        background: "transparent",
-        fontSize: "12px",
-        color: "var(--text)",
-        textAlign: "center",
-        outline: "none",
-        ...extra,
-      }}
-    />
-  );
-};
+  const inputTabla = (valor, onChange, tipo = "text", extra = {}) => {
+    const Comp = tipo === "number" ? NumInput : "input";
+    const numProps =
+      tipo === "number" ? { allowDecimal: true, allowNegative: true } : {};
+    return (
+      <Comp
+        type={tipo}
+        {...numProps}
+        value={valor}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "3px 5px",
+          border: "none",
+          background: "transparent",
+          fontSize: "12px",
+          color: "var(--text)",
+          textAlign: "center",
+          outline: "none",
+          ...extra,
+        }}
+      />
+    );
+  };
   const selectTabla = (valor, onChange, opciones) => (
     <select
       value={valor}
@@ -420,6 +422,33 @@ const inputTabla = (valor, onChange, tipo = "text", extra = {}) => {
           </div>
         </div>
       )}
+                 {/* Leyenda */}
+      <div
+        style={{
+          display: "flex",
+          gap: "16px",
+          marginBottom: "12px",
+          flexWrap: "wrap",
+        }}
+      >        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            fontSize: "11px",
+          }}
+        >
+          <div
+            style={{
+              width: "12px",
+              height: "12px",
+              background: "var(--accent2)",
+              borderRadius: "2px",
+              border: "1px solid var(--accent)",
+            }}
+          />
+          <span>Día actual</span>
+        </div></div>
 
       <div style={{ overflowX: "auto" }}>
         <table
@@ -615,6 +644,34 @@ const inputTabla = (valor, onChange, tipo = "text", extra = {}) => {
           )}
         </div>
       </div>
+      {/* Leyenda */}
+      <div
+        style={{
+          display: "flex",
+          gap: "16px",
+          marginBottom: "12px",
+          flexWrap: "wrap",
+        }}
+      >        <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          fontSize: "11px",
+        }}
+      >
+          <div
+            style={{
+              width: "12px",
+              height: "12px",
+              background: "var(--accent2)",
+              borderRadius: "2px",
+              border: "1px solid var(--accent)",
+            }}
+          />
+          <span>Día actual</span>
+        </div></div>
+
 
       <div style={{ overflowX: "auto" }}>
         <table
